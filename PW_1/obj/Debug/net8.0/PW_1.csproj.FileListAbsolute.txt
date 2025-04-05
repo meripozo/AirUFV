@@ -1,0 +1,15 @@
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\bin\Debug\net8.0\PW_1.exe
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\bin\Debug\net8.0\PW_1.deps.json
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\bin\Debug\net8.0\PW_1.runtimeconfig.json
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\bin\Debug\net8.0\PW_1.dll
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\bin\Debug\net8.0\PW_1.pdb
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\PW_1.GeneratedMSBuildEditorConfig.editorconfig
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\PW_1.AssemblyInfoInputs.cache
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\PW_1.AssemblyInfo.cs
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\PW_1.csproj.CoreCompileInputs.cache
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\PW_1.sourcelink.json
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\PW_1.dll
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\refint\PW_1.dll
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\PW_1.pdb
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\PW_1.genruntimeconfig.cache
+c:\VSCode\OOP2\Practical_Work_1\AirUFV\PW_1\obj\Debug\net8.0\ref\PW_1.dll
