@@ -7,8 +7,9 @@ namespace AirportSimulation
         public string ID { get; set; }
         public RunwayStatus Status { get; set; }
         public Aircraft CurrentAircraft { get; set; }
-        //we need to add tick remaining atribute 
+        public int TicksRemaining { get; set; } // ticks until the runway is free
 
+        public const int DefaultTicksAvailability = 3; // ticks it takes to land and free runway
 
         public Runway(string id)
         {
