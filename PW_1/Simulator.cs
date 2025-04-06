@@ -20,6 +20,8 @@ namespace AirportSimulation
             bool exit = false;
             while (!exit)
             {
+                Console.Clear();
+
                 Console.WriteLine("\n╔═══════════════════════════════════════╗");
                 Console.WriteLine("║    Airport Landing Simulation Menu    ║");
                 Console.WriteLine("║                                       ║");
@@ -57,6 +59,8 @@ namespace AirportSimulation
                         Console.WriteLine("Invalid option. Try again.");
                         break;
                 }
+            }
+        }
                 
                 
 
@@ -82,7 +86,5 @@ namespace AirportSimulation
                     }
                 }
                 //here, function for automatic simulation (we don´t know how to do it yet)
-            }
-        }
     }
 }
