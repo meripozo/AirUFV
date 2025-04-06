@@ -2,7 +2,7 @@ using System;
 
 namespace AirportSimulation
 {
-    public abstract class Airport
+    public class Airport
     {
         public List<Runway> Runways { get; set; }
         public List<Aircraft> Aircrafts {get; set;}
@@ -145,7 +145,7 @@ namespace AirportSimulation
         {
             // Aircraft Type
             Console.WriteLine("Select an Aircraft Type:");
-            Console.WriteLine(" 1. Commercia");
+            Console.WriteLine(" 1. Commercial");
             Console.WriteLine(" 2. Cargo");
             Console.WriteLine(" 3. Private");
 
@@ -186,11 +186,32 @@ namespace AirportSimulation
             double fuelConsumption = Convert.ToDouble(Console.ReadLine());
             double currentFuel = fuelCapacity; // maxed tank before flight
 
+
+            // Additional Data depending on the aircraft type: own specific attributes
+            switch(selectedType)
+            {
+                case 1:
+                    Console.Write("Enter number of passengers: ");
+                    int numPassengers = Convert.ToInt32(Console.ReadLine());
+                    Aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numPassengers));
+                    Console.WriteLine("Commercial Aircraft Successfully added!");
+                    break;
+                case 2:
+                    Console.Write("Enter maximum load (kg): ");
+                    double maxLoad = Convert.ToDouble(Console.ReadLine());
+                    Aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maxLoad));
+                    Console.WriteLine("Cargo Aircraft Successfully added!");
+                    break;
+                case 3:
+                    Console.Write("Enter owner name: ");
+                    string owner = Console.ReadLine();
+                    Aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, owner));
+                    Console.WriteLine("Private Aircraft Successfully added!");
+                    break;
+                default:
+                    Console.WriteLine("Invalid Aircraft type selection.");
+                    break;
+            }
         }
-
-
-        //create load 
-
-        //need to specify the aircraft type too
     }
 }

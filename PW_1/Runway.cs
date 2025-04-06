@@ -38,15 +38,7 @@ namespace AirportSimulation
                 }
             }
         }
-        
-        //add free runway for next aircraft
 
-        public override string ToString()
-        {
-            return Status == RunwayStatus.Free
-                ? $"{ID}: Free"
-                : $"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: ";
-        }
 
         // Attempts to assign an aircraft to the runway for landing
         public bool RequestRunway(Aircraft aircraft)
@@ -68,6 +60,13 @@ namespace AirportSimulation
             CurrentAircraft = null;
             Status = RunwayStatus.Free;
             TicksRemaining = 0;
+        }
+
+        public override string ToString()
+        {
+            return Status == RunwayStatus.Free
+                ? $"{ID}: Free"
+                : $"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: ";
         }
     }
 }

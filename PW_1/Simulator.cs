@@ -2,7 +2,8 @@ using System;
 using System.Security.Cryptography.X509Certificates;
 
 namespace AirportSimulation
-{//esta va a ser nuestra clase controladora, además de usarse como interfaz
+{
+    //esta va a ser nuestra clase controladora, además de usarse como interfaz
     public class Simulator
     {
 
@@ -47,7 +48,7 @@ namespace AirportSimulation
                         RunSimulationManu();
                         break;
                     case 4:
-                       
+                        //RunSimulationAuto();
                         break;
                     case 5:
                         exit = true;
@@ -56,12 +57,30 @@ namespace AirportSimulation
                         Console.WriteLine("Invalid option. Try again.");
                         break;
                 }
+                
+                
 
-                public void RunSimulationManu(){
-                    //we need to start the simulation, by showing the status
-                    //keep in mind the tick
+                public void RunSimulationManu()
+                {
+                    Console.WriteLine("Starting simulation. Press any key to advance one tick, or '*' to quit simulation.");
+                    bool simulationRunning = true;
+                    while (simulationRunning)
+                    {
+                        Console.WriteLine("\n-----------------------------------------------");
+                        Console.WriteLine("Current system status:");
+                        airport.ShowStatus();
+                        Console.WriteLine("\nPress any key to advance one tick, or '*' to quit simulation.");
+                        string input = Console.ReadLine();
+                        if (input == "*")
+                        {
+                            simulationRunning = false;
+                        }
+                        else
+                        {
+                            airport.AdvanceTick();
+                        }
+                    }
                 }
-
                 //here, function for automatic simulation (we don´t know how to do it yet)
             }
         }
