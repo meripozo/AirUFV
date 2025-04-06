@@ -15,15 +15,30 @@ namespace AirportSimulation
             ID = id;
             Status = RunwayStatus.Free;
             CurrentAircraft = null;
+            TicksRemaining = 0;
         }
 
         //add request runway
 
-        //add uodate runway
-        //add release runway
-
-
-
+        // Update the runway's occupation time for one tick.
+        public void UpdateTick()
+        {
+            if (Status == RunwayStatus.Occupied)
+            {
+                if (TicksRemaining > 0)
+                {
+                    TicksRemaining--;
+                }
+                if (TicksRemaining == 0 && CurrentAircraft != null)
+                {
+                    // Landing complete and aircraft is OnGround
+                    CurrentAircraft.Status = AircraftStatus.OnGround;
+                    ReleaseRunway();
+                }
+            }
+        }
+        
+        //add free runway for next aircraft
 
         public override string ToString()
         {
