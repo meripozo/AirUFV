@@ -108,17 +108,17 @@ namespace AirportSimulation
                     double currentFuel = fuelCapacity; // maxed fuel before starting flight
 
                     // StringComparison for upper and lower case letter compatibility
-                    if ("Commercial", StringComparison.OrdinalIgnoreCase)
+                    if (type.Equals("Commercial", StringComparison.OrdinalIgnoreCase))
                     {
                         int numPassengers = int.Parse(parts[7]);
                         Aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numPassengers));
                     }
-                    else if ("Cargo", StringComparison.OrdinalIgnoreCase)
+                    else if (type.Equals("Cargo", StringComparison.OrdinalIgnoreCase))
                     {
                         double maxLoad = double.Parse(parts[7]);
                         Aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maxLoad));
                     }
-                    else if ("Private", StringComparison.OrdinalIgnoreCase)
+                    else if (type.Equals("Private", StringComparison.OrdinalIgnoreCase))
                     {
                         string owner = parts[7];
                         Aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, owner));
