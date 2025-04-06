@@ -1,9 +1,19 @@
 using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AirportSimulation
-{
+{//esta va a ser nuestra clase controladora, además de usarse como interfaz
     public class Simulator
     {
+
+        private Airport airport;
+//instanciamos los runways 
+        public Simulator()
+        {
+            airport = new Airport();
+            airport.AddRunway(new Runway("Runway-1"));
+            airport.AddRunway(new Runway("Runway-2"));
+        }
         public void MainMenu()
         {
             bool exit = false;
@@ -25,16 +35,19 @@ namespace AirportSimulation
                 switch (option)
                 {
                     case 1:
-                    // Add from file
+                        Console.Write("Enter file path: ");
+                        string filePath = Console.ReadLine();
+                        bool result = airport.LoadAircraftFromFile(filePath);
+                        if (result) Console.WriteLine("Flights loaded successfully.");
                         break;
                     case 2:
-                    // Add aircraft manually
+                        airport.AddAircraft();
                         break;
                     case 3:
-                    // Simulate manually
+                        RunSimulationManu();
                         break;
                     case 4:
-                    // Simulate auto (extra)
+                       
                         break;
                     case 5:
                         exit = true;
@@ -43,6 +56,13 @@ namespace AirportSimulation
                         Console.WriteLine("Invalid option. Try again.");
                         break;
                 }
+
+                public void RunSimulationManu(){
+                    //we need to start the simulation, by showing the status
+                    //keep in mind the tick
+                }
+
+                //here, function for automatic simulation (we don´t know how to do it yet)
             }
         }
     }

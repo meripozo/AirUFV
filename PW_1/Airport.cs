@@ -69,8 +69,57 @@ namespace AirportSimulation
             }
         }
 
-        //create class load from file
+        // Load aircraft from a CSV file
+        // If return true = flights loaded successfully
+        // If return flase = flights not loaded successfully
+        public bool LoadAircraftFromFile(string filePath)
+        {
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine("File does not exist.");
+                return false;
+            }
+
+            try
+            {
+                string[] lines = File.ReadAllLines(filePath);
+                foreach (string line in lines)
+                {
+                    //
+                    else
+                    {
+                        Console.WriteLine("Unknown aircraft type.");
+                        return false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error loading file: " + ex.Message);
+                return false;
+            }
+            return true;
+        }
+
+
+        // we Add an aircraft manually with the users console input
+        public void AddAircraft()
+        {
+            // Aircraft Type
+            Console.WriteLine("Select an Aircraft Type:");
+            Console.WriteLine(" 1. Commercia");
+            Console.WriteLine(" 2. Cargo");
+            Console.WriteLine(" 3. Private");
+
+
+            //aircraft atributes are still missing 
+        }
+
+
+
 
         //create load 
+
+        //need to specify the aircraft type too
     }
 }
