@@ -25,6 +25,27 @@ namespace AirportSimulation
             CurrentFuel = currentFuel;
         }
 
+        public virtual void UpdateTick()
+        {
+            if (Status == AircraftStatus.InFlight)
+            {
+                int distanceCovered = Speed / 4;
+                if (distanceCovered > Distance)
+                {
+                    distanceCovered = Distance;
+                }
+                Distance -= distanceCovered;
+
+                double fuelUsed = distanceCovered * FuelConsumption;
+                CurrentFuel = Math.Max(0, CurrentFuel - fuelUsed); // Avoid a negative fuel
+
+                if (Distance == 0)
+                {
+                    Status = AircraftStatus.Waiting;
+                }
+            }
+        }
+
         public override string ToString()
         {
             return $"ID: {ID}, Status: {Status}, Distance: {Distance}km, Speed: {Speed}km/h, Fuel: {CurrentFuel}/{FuelCapactity}";
