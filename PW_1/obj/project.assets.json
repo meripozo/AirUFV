@@ -8,19 +8,19 @@
     "net8.0": []
   },
   "packageFolders": {
-    "C:\\Users\\angel\\.nuget\\packages\\": {}
+    "C:\\Users\\María\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\angel\\OneDrive\\Documentos\\2_SEGUNDO\\2_CUATRI\\OOP\\PracticalWork1\\AirUFV\\PW_1\\PW_1.csproj",
+      "projectUniqueName": "C:\\VSCode\\OOP2\\Practical_Work_1\\AirUFV\\PW_1\\PW_1.csproj",
       "projectName": "PW_1",
-      "projectPath": "C:\\Users\\angel\\OneDrive\\Documentos\\2_SEGUNDO\\2_CUATRI\\OOP\\PracticalWork1\\AirUFV\\PW_1\\PW_1.csproj",
-      "packagesPath": "C:\\Users\\angel\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\angel\\OneDrive\\Documentos\\2_SEGUNDO\\2_CUATRI\\OOP\\PracticalWork1\\AirUFV\\PW_1\\obj\\",
+      "projectPath": "C:\\VSCode\\OOP2\\Practical_Work_1\\AirUFV\\PW_1\\PW_1.csproj",
+      "packagesPath": "C:\\Users\\María\\.nuget\\packages\\",
+      "outputPath": "C:\\VSCode\\OOP2\\Practical_Work_1\\AirUFV\\PW_1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\angel\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\María\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
