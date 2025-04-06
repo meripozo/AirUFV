@@ -6,8 +6,8 @@ namespace AirportSimulation
     {
         public string Owner {get; set;} //individual attribute from private aircraft
 
-        public PrivateAircraft(string id, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, string owner)
-            : base(id, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
+        public PrivateAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, string owner)
+            : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
         {
             Owner = owner;
         }

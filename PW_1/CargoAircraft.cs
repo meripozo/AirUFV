@@ -6,8 +6,8 @@ namespace AirportSimulation
     {
         public double MaxLoad {get; set;} //individual attribute from cargo aircraft
 
-        public CargoAircraft(string id, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maxLoad)
-            : base(id, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
+        public CargoAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maxLoad)
+            : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
         {
             MaxLoad = maxLoad;
         }

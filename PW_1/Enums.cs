@@ -2,7 +2,8 @@ using System;
 
 namespace AirportSimulation
 {
-    public enum AircraftStatus
+    //states for the aircraft and the runway 
+    public enum AircraftStatus 
     {
         InFlight,
         Waiting,
