@@ -41,7 +41,7 @@ namespace AirportSimulation
         {
             foreach (var aircraft in Aircrafts)
             {
-                if (aircraft.Status == AircraftStatus.OnGround)
+                if (aircraft.Status != AircraftStatus.OnGround)
                 {
                     aircraft.UpdateTick();
                 }
