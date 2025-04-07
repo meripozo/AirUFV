@@ -1,0 +1,25 @@
+[
+    {
+      "ID": "782TF",
+      "Status": "InFlight",
+      "Distance": 120,
+      "Speed": 600,
+      "Type": "Commercial",
+      "FuelCapacity": 20000.0,
+      "FuelConsumption": 25.0,
+      "CurrentFuel": 18000.0,
+      "NumberOfPassengers": 180
+    },
+    {
+      "ID": "62DT",
+      "Status": "InFlight",
+      "Distance": 80,
+      "Speed": 400,
+      "Type": "Private",
+      "FuelCapacity": 6000.0,
+      "FuelConsumption": 15.0,
+      "CurrentFuel": 4500.0,
+      "Owner": "Elon Musk"
+    }
+  ]
+  
