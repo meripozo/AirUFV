@@ -231,10 +231,14 @@ namespace AirportSimulation
                 Console.WriteLine("Invalid state.");
                 return;
             }
-            
+
             // Distance
-            Console.Write("Enter distance from airport (km): ");
-            int distance = Convert.ToInt32(Console.ReadLine());
+            int distance = 0;
+            if (stateInput == "InFlight")
+            {
+                Console.Write("Enter distance from airport (km): ");
+                distance = Convert.ToInt32(Console.ReadLine());
+            }
 
             // Speed
             Console.Write("Enter speed (km/h): ");
