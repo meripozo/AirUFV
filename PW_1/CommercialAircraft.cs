@@ -2,11 +2,11 @@ using System;
 
 namespace AirportSimulation
 {
-    public class CommercialAircraft : Aircraft //inherits from aircraft 
+    public class CommercialAircraft : Aircraft
     {
-        public int NumPassengers {get; set;} //individual attribute from commercial aircraft
+        public int NumPassengers { get; set; }
 
-        public CommercialAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, int numPassengers)
+        public CommercialAircraft(string id, int status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, int numPassengers)
             : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
         {
             NumPassengers = numPassengers;

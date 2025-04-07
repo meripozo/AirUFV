@@ -1,35 +1,32 @@
 using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace AirportSimulation
 {
-    //esta va a ser nuestra clase controladora, además de usarse como interfaz
     public class Simulator
     {
-
         private Airport airport;
-//instanciamos los runways 
+
         public Simulator()
         {
             airport = new Airport();
             airport.AddRunway(new Runway("Runway-1"));
             airport.AddRunway(new Runway("Runway-2"));
         }
+
         public void MainMenu()
         {
             bool exit = false;
             while (!exit)
             {
                 Console.Clear();
-
+                
                 Console.WriteLine("\n╔═══════════════════════════════════════╗");
                 Console.WriteLine("║    Airport Landing Simulation Menu    ║");
                 Console.WriteLine("║                                       ║");
                 Console.WriteLine("║ 1. Load flights from file             ║");
                 Console.WriteLine("║ 2. Add a flight manually              ║");
                 Console.WriteLine("║ 3. Start simulation (Manual)          ║");
-                Console.WriteLine("║ 4. Start simulation (Automatic)       ║");
-                Console.WriteLine("║ 5. Exit                               ║");
+                Console.WriteLine("║ 4. Exit                               ║");
                 Console.WriteLine("╚═══════════════════════════════════════╝");
                 Console.Write("Select an option: ");
 
@@ -38,13 +35,11 @@ namespace AirportSimulation
                 switch (option)
                 {
                     case 1:
-                        Console.WriteLine("Enter file path: ");
-                        // Console.Write("Enter file path: ");
-                        // string filePath = Console.ReadLine();
-                        // bool result = airport.LoadAircraftFromFile(filePath);
-                        // if (result) Console.WriteLine("Flights loaded successfully.");
-
-                        LoadAircraftFromFile(Console.ReadLine());
+                        Console.Write("Enter file path: ");
+                        string filePath = Console.ReadLine();
+                        bool result = airport.LoadAircraftFromFile(filePath);
+                        if (result) Console.WriteLine("Flights loaded successfully.");
+                        Console.ReadLine();
                         break;
                     case 2:
                         airport.AddAircraft();
@@ -53,18 +48,16 @@ namespace AirportSimulation
                         RunSimulationManu();
                         break;
                     case 4:
-                        RunSimulationAuto();
-                        break;
-                    case 5:
                         exit = true;
                         break;
                     default:
                         Console.WriteLine("Invalid option. Try again.");
+                        Console.ReadLine();
                         break;
                 }
             }
         }
-                
+
         public void RunSimulationManu()
         {
             Console.WriteLine("Starting simulation. Press any key to advance one tick, or '*' to quit simulation.");
@@ -85,11 +78,6 @@ namespace AirportSimulation
                     airport.AdvanceTick();
                 }
             }
-        }
-
-        public void RunSimulationAuto()
-        {
-            
         }
     }
 }

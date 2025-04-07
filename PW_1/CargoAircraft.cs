@@ -2,11 +2,11 @@ using System;
 
 namespace AirportSimulation
 {
-    public class CargoAircraft : Aircraft //inherits from aircraft 
+    public class CargoAircraft : Aircraft
     {
-        public double MaxLoad {get; set;} //individual attribute from cargo aircraft
+        public double MaxLoad { get; set; }
 
-        public CargoAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maxLoad)
+        public CargoAircraft(string id, int status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maxLoad)
             : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
         {
             MaxLoad = maxLoad;

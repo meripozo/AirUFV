@@ -19,7 +19,19 @@ namespace AirportSimulation
             TicksRemaining = 0;
         }
 
-        //add request runway
+        // Attempts to assign an aircraft to the runway for landing
+        public bool RequestRunway(Aircraft aircraft)
+        {
+            if (Status == RunwayStatus.Free && aircraft.Status == 2)
+            {
+                CurrentAircraft = aircraft;
+                Status = RunwayStatus.Occupied;
+                TicksRemaining = DefaultTicksAvailability;
+                aircraft.Status = 3;
+                return true;
+            }
+            return false;
+        }
 
         // Update the runway's occupation time for one tick.
         public void UpdateTick()
@@ -33,25 +45,10 @@ namespace AirportSimulation
                 if (TicksRemaining == 0 && CurrentAircraft != null)
                 {
                     // Landing complete and aircraft is OnGround
-                    CurrentAircraft.Status = AircraftStatus.OnGround;
+                    CurrentAircraft.Status = 4;
                     ReleaseRunway();
                 }
             }
-        }
-
-
-        // Attempts to assign an aircraft to the runway for landing
-        public bool RequestRunway(Aircraft aircraft)
-        {
-            if (Status == RunwayStatus.Free && aircraft.Status == AircraftStatus.Waiting)
-            {
-                CurrentAircraft = aircraft;
-                Status = RunwayStatus.Occupied;
-                TicksRemaining = DefaultTicksAvailability;
-                aircraft.Status = AircraftStatus.Landing;
-                return true;
-            }
-            return false;
         }
 
         // Frees the runway
@@ -66,7 +63,7 @@ namespace AirportSimulation
         {
             return Status == RunwayStatus.Free
                 ? $"{ID}: Free"
-                : $"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: ";
+                : $"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: {TicksRemaining}";
         }
     }
 }

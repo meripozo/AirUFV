@@ -1,34 +1,34 @@
 using System;
-using System.Net;
 
 namespace AirportSimulation
 {
-    public abstract class Aircraft 
+    public abstract class Aircraft
     {
-        public string ID{get; set;}
-        public AircraftStatus Status {set; get;}
-        public int Distance {get; set;}
-        public int Speed {get; set;}
-        public double FuelCapactity{get;set;}
-        public double FuelConsumption {get; set;}
-        public double CurrentFuel {get; set;}
-    
-//attributes for the aircrafts 
-        public Aircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapactity, double fuelConsumption, double currentFuel)
+        public string ID { get; set; }
+        public int Status { get; set; }
+        public int Distance { get; set; }          // in kilometers
+        public int Speed { get; set; }             // in km/h
+        public double FuelCapacity { get; set; }   // in liters
+        public double FuelConsumption { get; set; } // liters per km
+        public double CurrentFuel { get; set; }     // in liters
+
+        public Aircraft(string id, int status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel)
         {
             ID = id;
-            Status=status;
+            Status = status;
             Distance = distance;
             Speed = speed;
-            FuelCapactity = fuelCapactity;
+            FuelCapacity = fuelCapacity;
             FuelConsumption = fuelConsumption;
             CurrentFuel = currentFuel;
         }
 
+        // Updates the aircraft's state for one tick (15 minutes)
         public virtual void UpdateTick()
         {
-            if (Status == AircraftStatus.InFlight)
+            if (Status == 1)
             {
+                // Calculate distance covered in 15 minutes (speed / 4)
                 int distanceCovered = Speed / 4;
                 if (distanceCovered > Distance)
                 {
@@ -36,19 +36,21 @@ namespace AirportSimulation
                 }
                 Distance -= distanceCovered;
 
+                // Consumed fuel according to distance covered
                 double fuelUsed = distanceCovered * FuelConsumption;
-                CurrentFuel = Math.Max(0, CurrentFuel - fuelUsed); // Avoid a negative fuel
+                CurrentFuel = Math.Max(0, CurrentFuel - fuelUsed); // Avoid a negative fuel value
 
+                // When the aircraft reaches the airport, set status to Waiting
                 if (Distance == 0)
                 {
-                    Status = AircraftStatus.Waiting;
+                    Status = 2;
                 }
             }
         }
 
         public override string ToString()
         {
-            return $"ID: {ID}, Status: {Status}, Distance: {Distance}km, Speed: {Speed}km/h, Fuel: {CurrentFuel}/{FuelCapactity}";
+            return $"ID: {ID}, Status: {Status}, Distance: {Distance}km, Speed: {Speed}km/h, Fuel: {CurrentFuel}/{FuelCapacity}L";
         }
     }
 }

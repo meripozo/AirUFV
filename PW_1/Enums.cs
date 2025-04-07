@@ -2,16 +2,15 @@ using System;
 
 namespace AirportSimulation
 {
-    //states for the aircraft and the runway 
-    public enum AircraftStatus 
+    public enum AircraftStatus : int
     {
-        InFlight,
-        Waiting,
-        Landing,
-        OnGround
+        InFlight = 1,
+        Waiting = 2,
+        Landing = 3,
+        OnGround = 4
     }
 
-    public enum RunwayStatus
+    public enum RunwayStatus 
     {
         Free,
         Occupied
