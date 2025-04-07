@@ -38,10 +38,13 @@ namespace AirportSimulation
                 switch (option)
                 {
                     case 1:
-                        Console.Write("Enter file path: ");
-                        string filePath = Console.ReadLine();
-                        bool result = airport.LoadAircraftFromFile(filePath);
-                        if (result) Console.WriteLine("Flights loaded successfully.");
+                        Console.WriteLine("Enter file path: ");
+                        // Console.WriteLine($"{filePath}");
+                        // bool result = airport.LoadAircraftFromFile(filePath);
+                        // Console.WriteLine($"{result}");
+                        //if (result) Console.WriteLine("Flights loaded successfully.");
+
+                        LoadAircraftFromFile(Console.ReadLine());
                         break;
                     case 2:
                         airport.AddAircraft();

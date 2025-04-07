@@ -82,7 +82,70 @@ namespace AirportSimulation
 
             try
             {
-                string[] lines = File.ReadAllLines(filePath);
+                StreamReader fileSr = File.OpenText(filePath);  //ahora en la variable fileSr tengo todo el documento
+
+            string line = fileSr.ReadLine(); //esto es para que se salte la primero línea del documento cuando lo lea
+
+
+            while ((line = fileSr.ReadLine()) != null) //bucle que va de línea en línea, hasta que ya no encuentra líneas. 
+            {
+                //Reemplazar puntos por comas en la línea
+
+                string[] lineReading = line.Split(';'); //cuando lee el ; divide el contenido de la línea y lo guarda en el array
+                //esta función divide el contenido de line en parámetros
+                //(se me crea una array con distintos strings de los productos que hay en cada línea ) 
+                string[] list = line.Split(";");
+
+                if (list[4] == "Commercial")
+                {
+                    Console.WriteLine(double.Parse(list[3]));
+
+                    Aircrafts.Add(new CommercialAircraft(     //así añadimos a la list aircrafts un aircrafts de cada tipo, 
+                                                              //con sus correspondientes atributos
+                        list[0],
+                        list[1],
+                        int.Parse(list[2]),
+                        int.Parse(list[3]),
+                        int.Parse(list[5]),
+                        int.Parse(list[6]),
+                        int.Parse(list[7])));
+                    Console.Clear();
+                }
+                else if (list[4] == "Cargo")
+                {
+                    Aircrafts.Add(new CargoAircraft(
+                        list[0],
+                        list[1],
+                        int.Parse(list[2]),
+                        int.Parse(list[3]),
+                        int.Parse(list[4]),
+                        int.Parse(list[5]),
+                        int.Parse(list[6]),
+                        int.Parse(list[7])));
+                    Console.Clear();
+                }
+                else if (list[4] == "Private")
+                {
+                    Aircrafts.Add(new PrivateAircraft(
+                        list[0],
+                        list[1],
+                        int.Parse(list[2]),
+                        int.Parse(list[3]),
+                        int.Parse(list[4]),
+                        int.Parse(list[5]),
+                        int.Parse(list[6]),
+                        list[7]));
+                    Console.Clear();
+                }
+
+                else { Console.WriteLine("There is a problem with the file or with the information"); Console.ReadKey(); }
+
+
+
+
+
+
+                //string[] lines = File.ReadAllLines(filePath);
                 foreach (string line in lines)
                 {
                     // ID;State;Distance;Speed;Type;FuelCapacity;FuelConsumption;AdditionalData
