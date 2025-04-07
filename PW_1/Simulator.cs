@@ -39,10 +39,10 @@ namespace AirportSimulation
                 {
                     case 1:
                         Console.WriteLine("Enter file path: ");
-                        // Console.WriteLine($"{filePath}");
+                        // Console.Write("Enter file path: ");
+                        // string filePath = Console.ReadLine();
                         // bool result = airport.LoadAircraftFromFile(filePath);
-                        // Console.WriteLine($"{result}");
-                        //if (result) Console.WriteLine("Flights loaded successfully.");
+                        // if (result) Console.WriteLine("Flights loaded successfully.");
 
                         LoadAircraftFromFile(Console.ReadLine());
                         break;
@@ -53,7 +53,7 @@ namespace AirportSimulation
                         RunSimulationManu();
                         break;
                     case 4:
-                        //RunSimulationAuto();
+                        RunSimulationAuto();
                         break;
                     case 5:
                         exit = true;
@@ -65,29 +65,31 @@ namespace AirportSimulation
             }
         }
                 
-                
-
-                public void RunSimulationManu()
+        public void RunSimulationManu()
+        {
+            Console.WriteLine("Starting simulation. Press any key to advance one tick, or '*' to quit simulation.");
+            bool simulationRunning = true;
+            while (simulationRunning)
+            {
+                Console.WriteLine("\n-----------------------------------------------");
+                Console.WriteLine("Current system status:");
+                airport.ShowStatus();
+                Console.WriteLine("\nPress any key to advance one tick, or '*' to quit simulation.");
+                string input = Console.ReadLine();
+                if (input == "*")
                 {
-                    Console.WriteLine("Starting simulation. Press any key to advance one tick, or '*' to quit simulation.");
-                    bool simulationRunning = true;
-                    while (simulationRunning)
-                    {
-                        Console.WriteLine("\n-----------------------------------------------");
-                        Console.WriteLine("Current system status:");
-                        airport.ShowStatus();
-                        Console.WriteLine("\nPress any key to advance one tick, or '*' to quit simulation.");
-                        string input = Console.ReadLine();
-                        if (input == "*")
-                        {
-                            simulationRunning = false;
-                        }
-                        else
-                        {
-                            airport.AdvanceTick();
-                        }
-                    }
+                    simulationRunning = false;
                 }
-                //here, function for automatic simulation (we don´t know how to do it yet)
+                else
+                {
+                    airport.AdvanceTick();
+                }
+            }
+        }
+
+        public void RunSimulationAuto()
+        {
+            
+        }
     }
 }
