@@ -39,7 +39,7 @@ namespace AirportSimulation
             }
         }
 
-        // Advance simulation by one tick (15 mins)
+        // Advance simulation by one tick (15 mins) (update runway and aircrafts)
         public void AdvanceTick()
         {
             // Update each aircraft (skip if OnGround)
@@ -56,13 +56,18 @@ namespace AirportSimulation
             {
                 if (aircraft.Status == 2)
                 {
-                    foreach (var runway in Runways)
+                    bool searchingRunway = true;
+                    while(searchingRunway)
                     {
-                        if (runway.Status == RunwayStatus.Free)
+                        foreach (var runway in Runways)
                         {
-                            runway.RequestRunway(aircraft);
-                            return; // no se puede usar
-                        }
+                            if (runway.Status == RunwayStatus.Free)
+                            {
+                                runway.RequestRunway(aircraft);
+                                searchingRunway = false;
+                                //return; // no se puede usar
+                            }
+                        } 
                     }
                 }
             }
@@ -101,24 +106,43 @@ namespace AirportSimulation
                     }
 
                     string id = parts[0];
-                    int status = int.Parse(parts[1]); // no funciona ya que se le pasa un string y este coge el int que le corresponde
-                    int distance = int.Parse(parts[2]);
-                    int speed = int.Parse(parts[3]);
+
+                    int status = 0;
+                    if(parts[1] == "InFlight")
+                    {
+                        status = 1;
+                    }
+                    else if(parts[1] == "Waiting")
+                    {
+                        status = 2;
+                    }
+                    else if(parts[1] == "Landing")
+                    {
+                        status = 3;
+                    }
+                    else if(parts[1] == "OnGround")
+                    {
+                        status = 4;
+                    } // Tiene q haber una forma mas facil no moises?
+
+                    // int status = Convert.ToInt32(parts[1]); // no funciona ya que se le pasa un string y este coge el int que le corresponde
+                    int distance = Convert.ToInt32(parts[2]);
+                    int speed = Convert.ToInt32(parts[3]);
                     string type = parts[4];
-                    double fuelCapacity = double.Parse(parts[5]);
-                    double fuelConsumption = double.Parse(parts[6]);
+                    double fuelCapacity = Convert.ToDouble(parts[5]);
+                    double fuelConsumption = Convert.ToDouble(parts[6]);
 
                     double currentFuel = fuelCapacity; // maxed fuel before starting flight
 
                     // StringComparison for upper and lower case letter compatibility
                     if (type == "Commercial")
                     {
-                        int numPassengers = int.Parse(parts[7]);
+                        int numPassengers = Convert.ToInt32(parts[7]);
                         Aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numPassengers));
                     }
                     else if (type == "Cargo")
                     {
-                        double maxLoad = double.Parse(parts[7]);
+                        double maxLoad = Convert.ToDouble(parts[7]);
                         Aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maxLoad));
                     }
                     else if (type == "Private")
@@ -133,6 +157,7 @@ namespace AirportSimulation
                         return false;
                     }
                 }
+                Console.WriteLine($"Loaded Aircrfats: {Aircrafts.Count}"); //temporary for testing
             }
             catch (Exception ex)
             {
@@ -148,7 +173,7 @@ namespace AirportSimulation
         {
             // Aircraft Type
             Console.WriteLine("Select an Aircraft Type:");
-            Console.WriteLine(" 1. Commercia");
+            Console.WriteLine(" 1. Commercial");
             Console.WriteLine(" 2. Cargo");
             Console.WriteLine(" 3. Private");
             
@@ -166,7 +191,7 @@ namespace AirportSimulation
 
             // State
             Console.Write("Enter initial state (1. InFlight, 2. Waiting, 3. Landing, 4. OnGround): ");
-            int status = Int32.Parse(Console.ReadLine());
+            int status = Convert.ToInt32(Console.ReadLine());
 
             // Distance & Speed
             int distance = 0;
@@ -201,21 +226,24 @@ namespace AirportSimulation
                     Console.Write("Enter number of passengers: ");
                     int numPassengers = Convert.ToInt32(Console.ReadLine());
                     Aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numPassengers));
-                    Console.WriteLine("Commercial Aircrfat Successfully added!");
+                    Console.WriteLine("Commercial Aircraft Successfully added!");
+                    Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
                     Console.ReadLine();
                     break;
                 case 2:
                     Console.Write("Enter maximum load (kg): ");
                     double maxLoad = Convert.ToDouble(Console.ReadLine());
                     Aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maxLoad));
-                    Console.WriteLine("Cargo Aircrfat Successfully added!");
+                    Console.WriteLine("Cargo Aircraft Successfully added!");
+                    Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
                     Console.ReadLine();
                     break;
                 case 3:
                     Console.Write("Enter owner name: ");
                     string owner = Console.ReadLine();
                     Aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, owner));
-                    Console.WriteLine("Private Aircrfat Successfully added!");
+                    Console.WriteLine("Private Aircraft Successfully added!");
+                    Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
                     Console.ReadLine();
                     break;
                 default:

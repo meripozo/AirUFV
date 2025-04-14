@@ -10,7 +10,7 @@ namespace AirportSimulation
         OnGround = 4
     }
 
-    public enum RunwayStatus 
+    public enum RunwayStatus
     {
         Free,
         Occupied

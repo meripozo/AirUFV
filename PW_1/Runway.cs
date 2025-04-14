@@ -61,9 +61,7 @@ namespace AirportSimulation
 
         public override string ToString()
         {
-            return Status == RunwayStatus.Free
-                ? $"{ID}: Free"
-                : $"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: {TicksRemaining}";
+            return Status == RunwayStatus.Free ? $"{ID}: Free" : $"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: {TicksRemaining}";
         }
     }
 }

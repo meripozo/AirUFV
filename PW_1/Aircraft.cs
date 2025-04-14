@@ -38,7 +38,8 @@ namespace AirportSimulation
 
                 // Consumed fuel according to distance covered
                 double fuelUsed = distanceCovered * FuelConsumption;
-                CurrentFuel = Math.Max(0, CurrentFuel - fuelUsed); // Avoid a negative fuel value
+                CurrentFuel -= fuelUsed; 
+                if (CurrentFuel < 0) CurrentFuel = 0; // Avoid a negative fuel value
 
                 // When the aircraft reaches the airport, set status to Waiting
                 if (Distance == 0)
