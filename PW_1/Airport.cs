@@ -8,9 +8,11 @@ namespace AirportSimulation
 {
     public class Airport
     {
-        public List<Runway> Runways { get; set; }
-        public List<Aircraft> Aircrafts { get; set; }
+        //public List<Runway> Runways { get; set; }       //no se puede hacer esto
+        //public List<Aircraft> Aircrafts { get; set; }
 
+        private List<Runway> Runways;
+        private List<Aircraft> Aircrafts;
         public Airport()
         {
             Runways = new List<Runway>();
@@ -32,11 +34,18 @@ namespace AirportSimulation
                 Console.WriteLine(runway.ToString());
             }
 
-            Console.WriteLine("\nAircraft Status:");
+
+            Console.WriteLine("\nAircrafts Information: ");
+            Console.WriteLine($"Number of Aircrafts loaded: {Aircrafts.Count}");
             foreach (var aircraft in Aircrafts)
             {
                 Console.WriteLine(aircraft.ToString());
             }
+        }
+
+        public int GetNumberOfAircrafts()
+        {
+            return Aircrafts.Count;
         }
 
         // Advance simulation by one tick (15 mins) (update runway and aircrafts)
@@ -108,7 +117,7 @@ namespace AirportSimulation
                     string id = parts[0];
 
                     int status = 0;
-                    if(parts[1] == "InFlight")
+                    if(parts[1] == "InFlight")   //esto está bien!!
                     {
                         status = 1;
                     }
@@ -123,7 +132,7 @@ namespace AirportSimulation
                     else if(parts[1] == "OnGround")
                     {
                         status = 4;
-                    } // Tiene q haber una forma mas facil no moises?
+                    } 
 
                     // int status = Convert.ToInt32(parts[1]); // no funciona ya que se le pasa un string y este coge el int que le corresponde
                     int distance = Convert.ToInt32(parts[2]);
@@ -157,7 +166,7 @@ namespace AirportSimulation
                         return false;
                     }
                 }
-                Console.WriteLine($"Loaded Aircrfats: {Aircrafts.Count}"); //temporary for testing
+                Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
             }
             catch (Exception ex)
             {
@@ -190,7 +199,7 @@ namespace AirportSimulation
             string id = Console.ReadLine();
 
             // State
-            Console.Write("Enter initial state (1. InFlight, 2. Waiting, 3. Landing, 4. OnGround): ");
+            Console.Write("Enter initial state, enter number: (1. InFlight, 2. Waiting, 3. Landing, 4. OnGround): ");
             int status = Convert.ToInt32(Console.ReadLine());
 
             // Distance & Speed

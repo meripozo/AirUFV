@@ -12,9 +12,9 @@ namespace AirportSimulation
             MaxLoad = maxLoad;
         }
 
-        public override string ToString()
+        public virtual string ToString()
         {
-            return $"[Cargo] {base.ToString()}, Max Load: {MaxLoad}kg";
+            return $"[Cargo] {base.ToString()}, Max Load: {MaxLoad}kg"; //cambiar el base.ToString, hacerlo de otra forma
         }
     }
 }

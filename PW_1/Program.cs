@@ -7,15 +7,15 @@ namespace AirportSimulation
         public static void Main(string[] args)
         {
             Simulator simulator = new Simulator(); //we instantiate Simulator and Airport classes
-            Airport airport = new Airport();
-
             bool exit = false;
             while (!exit)
             {
                 Console.Clear();
-                
-                Console.WriteLine("\n╔═══════════════════════════════════════╗");
-                Console.WriteLine("║    Airport Landing Simulation Menu    ║");
+
+                Console.WriteLine();
+
+                Console.WriteLine("╔═══════════════════════════════════════╗");
+                Console.WriteLine("║    Airport Landing Simulation Menu:   ║");
                 Console.WriteLine("║                                       ║");
                 Console.WriteLine("║ 1. Load flights from file             ║");
                 Console.WriteLine("║ 2. Add a flight manually              ║");
@@ -31,12 +31,11 @@ namespace AirportSimulation
                     case 1:
                         Console.Write("Enter file path: ");
                         string filePath = Console.ReadLine();
-                        bool result = airport.LoadAircraftFromFile(filePath);
-                        if (result) Console.WriteLine("Flights loaded successfully.");
+                        simulator.LoadAircraftFromFile(filePath);
                         Console.ReadLine();
                         break;
                     case 2:
-                        airport.AddAircraft();
+                        simulator.AddAircraft();
                         break;
                     case 3:
                         simulator.RunSimulationManu();
@@ -45,7 +44,7 @@ namespace AirportSimulation
                         exit = true;
                         break;
                     default:
-                        Console.WriteLine("Invalid option. Try again.");
+                        Console.WriteLine("Invalid option. Please, select an option between 1 and 4.");
                         Console.ReadLine();
                         break;
                 }

@@ -59,7 +59,7 @@ namespace AirportSimulation
             TicksRemaining = 0;
         }
 
-        public override string ToString()
+        public virtual string ToString()
         {
             return Status == RunwayStatus.Free ? $"{ID}: Free" : $"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: {TicksRemaining}";
         }

@@ -12,9 +12,20 @@ namespace AirportSimulation
             airport.AddRunway(new Runway("Runway-1"));
             airport.AddRunway(new Runway("Runway-2"));
         }
+        public void LoadAircraftFromFile(string path)
+        {
+            bool result = airport.LoadAircraftFromFile(path);
+            if (result) Console.WriteLine("Flights loaded successfully.");
+        }
+        public void AddAircraft()
+        {
+            airport.AddAircraft();
+        }
 
         public void RunSimulationManu()
         {
+
+            Console.WriteLine(airport.GetNumberOfAircrafts());
             Console.WriteLine("Starting simulation. Press any key to advance one tick, or '*' to quit simulation.");
             bool simulationRunning = true;
             while (simulationRunning)

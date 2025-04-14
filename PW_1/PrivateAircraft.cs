@@ -12,9 +12,9 @@ namespace AirportSimulation
             Owner = owner;
         }
 
-        public override string ToString()
+        public virtual string ToString()
         {
-            return $"[Private] {base.ToString()}, Owner: {Owner}";
+            return $"[Private] {base.ToString()}, Owner: {Owner}"; //cambiar el base.ToString, hacerlo de otra forma
         }
     }
 }

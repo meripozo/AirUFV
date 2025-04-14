@@ -49,7 +49,7 @@ namespace AirportSimulation
             }
         }
 
-        public override string ToString()
+        public virtual string ToString()
         {
             return $"ID: {ID}, Status: {Status}, Distance: {Distance}km, Speed: {Speed}km/h, Fuel: {CurrentFuel}/{FuelCapacity}L";
         }
