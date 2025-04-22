@@ -261,5 +261,49 @@ namespace AirportSimulation
                     break;
             }
         }
+
+        //error checking 
+        public bool CheckString()
+        {
+            try
+            {
+                
+            }
+            catch(FormatException e)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Error, please enter the correct data type");
+                Console.ReadKey();
+            }
+            return true;
+        }
+        public bool CheckInt()
+        {
+            try
+            {
+
+            }
+            catch(FormatException e)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Error, please enter the correct data type");
+                Console.ReadKey();
+            }
+            return true;
+        }
+        public bool CheckDouble()
+        {
+            try
+            {
+                
+            }
+            catch(FormatException e)
+            {
+                Console.WriteLine("");
+                Console.WriteLine("Error, please enter the correct data type");
+                Console.ReadKey();
+            }
+            return true;
+        }
     }
 }
