@@ -102,15 +102,10 @@ namespace AirportSimulation
 
         public bool LoadAircraftFromFile(string filePath)
         {
-            if (!File.Exists(filePath))
-            {
-                Console.WriteLine("File does not exist.");
-                Console.ReadLine();
-                return false;
-            }
-
             try
             {
+                if (File.Exists(filePath))
+                {
                 StreamReader sr = File.OpenText(filePath);  //ahora en la variable fileSr tengo todo el documento
 
                 string line = sr.ReadLine(); // se salte la primera línea del documento al leerlo
@@ -178,14 +173,15 @@ namespace AirportSimulation
                         return false;
                     }
                 }
+                }
             }
-            catch (Exception ex)
+            catch (Exception ex)  //cambiar tipo de exception
             {
                 Console.WriteLine("Error loading file: " + ex.Message);
                 Console.ReadLine();
                 return false;
             }
-            return true;
+            return true;    //we return true to "if (result) Console.WriteLine("Flights loaded successfully.");" in simulator, when the try is executed
         }
 
         // Adds an aircraft manually with the users console input
