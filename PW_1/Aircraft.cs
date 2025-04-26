@@ -49,9 +49,9 @@ namespace AirportSimulation
             }
         }
 
-        public virtual string ToString()
+        public virtual void ToString()
         {
-            return $"ID: {ID}, Status: {Status}, Distance: {Distance}km, Speed: {Speed}km/h, Fuel: {CurrentFuel}/{FuelCapacity}L";
+            Console.Write($" ID: {ID}, Status: {Status}, Distance: {Distance}km, Speed: {Speed}km/h, Fuel: {CurrentFuel}/{FuelCapacity}L");
         }
     }
 }

@@ -12,9 +12,13 @@ namespace AirportSimulation
             NumPassengers = numPassengers;
         }
 
-        public virtual string ToString()
+        public override void ToString()
         {
-            return $"[Commercial] {base.ToString()}, Passengers: {NumPassengers}"; //cambiar el base.ToString, hacerlo de otra forma
+            Console.Write($"[Commercial]");
+
+            base.ToString();
+
+            Console.WriteLine($", Passengers: {NumPassengers}");
         }
     }
 }
