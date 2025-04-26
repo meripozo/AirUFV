@@ -168,16 +168,19 @@ namespace AirportSimulation
                         else
                         {
                             Console.WriteLine("Unknown aircraft type.");
-                            Console.ReadLine();
                             return false;
                         }
                     }
+                }
+                else
+                {
+                    Console.WriteLine("File not found.");
+                    return false;
                 }
             }
             catch (Exception ex)  //cambiar tipo de exception
             {
                 Console.WriteLine("Error loading file: " + ex.Message);
-                Console.ReadLine();
                 return false;
             }
             return true;    //we return true to "if (result) Console.WriteLine("Flights loaded successfully.");" in simulator, when the try is executed
