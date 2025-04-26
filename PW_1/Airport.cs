@@ -42,7 +42,7 @@ namespace AirportSimulation
             Console.WriteLine("Runway Status:");
             foreach (var runway in Runways)
             {
-                Console.WriteLine(runway.ToString());
+                runway.PrintRunwayInfo();
             }
 
 
@@ -50,7 +50,7 @@ namespace AirportSimulation
             Console.WriteLine($"Number of Aircrafts loaded: {Aircrafts.Count}");
             foreach (var aircraft in Aircrafts)
             {
-                aircraft.ToString();
+                aircraft.PrintAircraftInfo();
             }
         }
 

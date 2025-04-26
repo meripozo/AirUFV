@@ -12,11 +12,11 @@ namespace AirportSimulation
             NumPassengers = numPassengers;
         }
 
-        public override void ToString()
+        public override void PrintAircraftInfo()
         {
             Console.Write($"[Commercial]");
 
-            base.ToString();
+            base.PrintAircraftInfo();
 
             Console.WriteLine($", Passengers: {NumPassengers}");
         }

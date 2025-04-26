@@ -12,11 +12,11 @@ namespace AirportSimulation
             Owner = owner;
         }
 
-        public override void ToString()
+        public override void PrintAircraftInfo()
         {
             Console.Write($"[Private]");
 
-            base.ToString();
+            base.PrintAircraftInfo();
 
             Console.WriteLine($", Owner: {Owner}");
         }

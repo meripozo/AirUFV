@@ -59,9 +59,16 @@ namespace AirportSimulation
             TicksRemaining = 0;
         }
 
-        public virtual string ToString()
+        public void PrintRunwayInfo()
         {
-            return Status == RunwayStatus.Free ? $"{ID}: Free" : $"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: {TicksRemaining}";
+            if (Status == RunwayStatus.Free)
+            {
+                Console.WriteLine($"{ID}: Free");
+            }
+            else
+            {
+                Console.WriteLine($"{ID}: Occupied by {CurrentAircraft.ID}, Ticks Remaining: {TicksRemaining}");
+            }            
         }
     }
 }

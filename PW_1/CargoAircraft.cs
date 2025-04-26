@@ -12,11 +12,11 @@ namespace AirportSimulation
             MaxLoad = maxLoad;
         }
 
-        public override void ToString()
+        public override void PrintAircraftInfo()
         {
-            Console.Write($"[Cargo]"); // Call the base class ToString method
+            Console.Write($"[Cargo]");
 
-            base.ToString();
+            base.PrintAircraftInfo();
 
             Console.WriteLine($", Max Load: {MaxLoad}kg");
         }
