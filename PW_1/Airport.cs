@@ -107,7 +107,7 @@ namespace AirportSimulation
                 {
                     StreamReader sr = File.OpenText(filePath);  //ahora en la variable fileSr tengo todo el documento
 
-                    string line = sr.ReadLine(); // se salte la primera línea del documento al leerlo
+                    string? line = sr.ReadLine(); // se salte la primera línea del documento al leerlo
 
                     while ((line = sr.ReadLine()) != null) //bucle que va de línea en línea, hasta que ya no encuentra líneas. 
                     {
@@ -122,8 +122,21 @@ namespace AirportSimulation
 
                         // ID
                         id = parts[0];
+                        isValid = Verifications.IsValidString(id); // check if id is valid
+                        if (!isValid)
+                        {
+                            Console.WriteLine("Invalid ID format.");
+                            return false;
+                        }
 
                         // State
+                        isValid = Verifications.IsValidInt(Convert.ToInt32(parts[1])); // check if status is valid
+                        if (!isValid)
+                        {
+                            Console.WriteLine("Invalid status format.");
+                            return false;
+                        }
+                        
                         if(parts[1] == "InFlight")
                         {
                             status = 1;
@@ -141,28 +154,87 @@ namespace AirportSimulation
                             status = 4;
                         } 
 
+                        // Distance
                         distance = Convert.ToInt32(parts[2]);
+                        isValid = Verifications.IsValidDouble(distance); // check if distance is valid
+                        if (!isValid)
+                        {
+                            Console.WriteLine("Invalid distance format.");
+                            return false;
+                        }
+
+                        // Speed
                         speed = Convert.ToInt32(parts[3]);
+                        isValid = Verifications.IsValidInt(speed); // check if speed is valid
+                        if (!isValid)
+                        {
+                            Console.WriteLine("Invalid speed format.");
+                            return false;
+                        }
+
+                        // Fuel Capacity
                         fuelCapacity = Convert.ToDouble(parts[5]);
+                        isValid = Verifications.IsValidDouble(fuelCapacity); // check if fuelCapacity is valid
+                        if (!isValid)
+                        {
+                            Console.WriteLine("Invalid fuel capacity format.");
+                            return false;
+                        }
+
+                        // Fuel Consumption
                         fuelConsumption = Convert.ToDouble(parts[6]);
+                        isValid = Verifications.IsValidDouble(fuelConsumption); // check if fuelConsumption is valid
+                        if (!isValid)
+                        {
+                            Console.WriteLine("Invalid fuel consumption format.");
+                            return false;
+                        }
 
                         currentFuel = fuelCapacity; // maxed fuel before starting flight
 
                         // StringComparison for upper and lower case letter compatibility
                         string type = parts[4].ToLower();
+                        isValid = Verifications.IsValidString(type); // check if type is valid
+                        if (!isValid)
+                        {
+                            Console.WriteLine("Invalid aircraft type format.");
+                            return false;
+                        }
+
                         if (type == "commercial")
                         {
                             int numPassengers = Convert.ToInt32(parts[7]);
+                            isValid = Verifications.IsValidInt(numPassengers); // check if numPassengers is valid
+                            if (!isValid)
+                            {
+                                Console.WriteLine("Invalid number of passengers format.");
+                                return false;
+                            }
+
                             Aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numPassengers));
                         }
                         else if (type == "cargo")
                         {
                             double maxLoad = Convert.ToDouble(parts[7]);
+                            isValid = Verifications.IsValidDouble(maxLoad); // check if maxLoad is valid
+                            if (!isValid)
+                            {
+                                Console.WriteLine("Invalid maximum load format.");
+                                return false;
+                            }
+
                             Aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maxLoad));
                         }
                         else if (type == "private")
                         {
                             string owner = parts[7];
+                            isValid = Verifications.IsValidString(owner); // check if owner is valid
+                            if (!isValid)
+                            {
+                                Console.WriteLine("Invalid owner format.");
+                                return false;
+                            }
+
                             Aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, owner));
                         }
                         else
@@ -262,7 +334,7 @@ namespace AirportSimulation
                     {
                         Console.Write("Enter distance from airport (km): ");
                         distance = Convert.ToInt32(Console.ReadLine());
-                        isValid = Verifications.IsValidDouble(distance); // check if distance is valid
+                        isValid = Verifications.IsValidInt(distance); // check if distance is valid
 
                         if (distance < 0)
                         {
@@ -276,7 +348,7 @@ namespace AirportSimulation
                     {
                         Console.Write("Enter speed (km/h): ");
                         speed = Convert.ToInt32(Console.ReadLine());
-                        isValid = Verifications.IsValidDouble(speed); // check if speed is valid
+                        isValid = Verifications.IsValidInt(speed); // check if speed is valid
 
                         if (speed < 0)
                         {
@@ -328,16 +400,20 @@ namespace AirportSimulation
                     {
                         Console.Write("Enter fuel consumption (liters/km): ");
                         fuelConsumption = Convert.ToDouble(Console.ReadLine());
+                        isValid = Verifications.IsValidDouble(fuelConsumption); // check if fuelConsumption is valid
+
                         if (fuelConsumption < 0)
                         {
                             Console.WriteLine("Error, please enter the correct data type");
                         }
-                    } while (fuelConsumption < 0); //validation
+
+                    } while (false || fuelConsumption < 0); //validation
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Error, please enter the correct data type");
                 }
+                isValid = false; // reset for next input
             }
             else
             {
@@ -353,7 +429,7 @@ namespace AirportSimulation
                     try
                     {
                         Console.Write("Enter number of passengers: ");
-                        numPassengers = Convert.ToInt32(Console.ReadLine());
+                        numPassengers = Convert.ToInt32(Console.ReadLine()); // verification
 
                         Aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numPassengers));
                         Console.WriteLine("Commercial Aircraft Successfully added!");
@@ -369,7 +445,7 @@ namespace AirportSimulation
                     try
                     {
                         Console.Write("Enter maximum load (kg): ");
-                        maxLoad = Convert.ToDouble(Console.ReadLine());
+                        maxLoad = Convert.ToDouble(Console.ReadLine()); // verification
                         
                         Aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maxLoad));
                         Console.WriteLine("Cargo Aircraft Successfully added!");
@@ -385,7 +461,7 @@ namespace AirportSimulation
                     try
                     {
                         Console.Write("Enter owner name: ");
-                        owner = Console.ReadLine();
+                        owner = Console.ReadLine(); // verification
                         
                         Aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, owner));
                         Console.WriteLine("Private Aircraft Successfully added!");
