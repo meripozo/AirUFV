@@ -2,39 +2,52 @@ using System;
 
 namespace AirportSimulation
 {
-    public class Verifications
+    public abstract class Verifications
     {
-        public static bool IsValidString(string input)
-        {
-            if (input == null || input.Trim().Length == 0)
-            {
-                Console.WriteLine("Invalid input. Please enter a non-empty string.");
-                return false;
-            }
-            
-            return true;
-        }
+        public abstract void validateInput(string input);
 
-        public static bool IsValidInt(int input)
-        {
-            if (input < 0)
-            {
-                Console.WriteLine("Invalid input. Please enter a non-negative integer.");
-                return false;
-            }
-            
-            return true;
-        }
 
-        public static bool IsValidDouble(double input)
-        {
-            if (input < 0)
-            {
-                Console.WriteLine("Invalid input. Please enter a non-negative number.");
-                return false;
-            }
+
+
+
+
+
+
+
+
+
+        // public static bool IsValidString(string input)
+        // {
+        //     if (input == null || input.Trim().Length == 0)
+        //     {
+        //         Console.WriteLine("Invalid input. Please enter a non-empty string.");
+        //         return false;
+        //     }
             
-            return true;
-        }
+        //     return true;
+        // }
+
+        // public static bool IsValidInt(int input)
+        // {
+        //     if (input < 0)
+        //     {
+        //         Console.WriteLine("Invalid input. Please enter a non-negative integer.");
+        //         return false;
+        //     }
+            
+        //     return true;
+        // }
+
+        // public static bool IsValidDouble(double input)
+        // {
+        //     if (input < 0)
+        //     {
+        //         Console.WriteLine("Invalid input. Please enter a non-negative number.");
+        //         return false;
+        //     }
+            
+        //     return true;
+        // }
     }
 }
+
