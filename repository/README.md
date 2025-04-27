@@ -238,7 +238,7 @@ ID;State;Distance;Speed;Type;FuelCapacity;FuelConsumption;CurrentFuel;Additional
 **Class** **Diagram**
 
 This is the class diagram of our finished practical work:
-![image](https://github.com/user-attachments/assets/421fc12d-4579-43f7-947f-6dd3b7ac6262)
+![image](https://github.com/user-attachments/assets/978072c2-a0f4-411b-99f0-07ba9e79e969)
 
 > 6
 >
