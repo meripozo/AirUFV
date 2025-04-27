@@ -5,14 +5,25 @@ namespace AirportSimulation
     public abstract class Aircraft
     {
         protected string id { get; set; }
-        protected int status { get; set; }
+        protected AircraftStatus status;
         protected int distance { get; set; }          // in kilometers
         protected int speed { get; set; }             // in km/h
         protected double fuelCapacity { get; set; }   // in liters
         protected double fuelConsumption { get; set; } // liters per km
         protected double currentFuel { get; set; }     // in liters
 
-        public Aircraft(string id, int status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel)
+
+        // we use enumerators for aircraft status and runway status
+        // aircraft status has type int assigned for easier use on program
+        public enum AircraftStatus : int
+        {
+            InFlight = 1,
+            Waiting = 2,
+            Landing = 3,
+            OnGround = 4
+        }
+
+        public Aircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel)
         {
             this.id = id;
             this.status = status;
@@ -22,17 +33,20 @@ namespace AirportSimulation
             this.fuelConsumption = fuelConsumption;
             this.currentFuel = currentFuel;
         }
-        public string GetID()
-        {
-            return this.id;
-        }
-        public int GetStatus()
+
+        //with the enums, it only worked this way, with getters and setters
+        public AircraftStatus GetStatus()
         {
             return this.status;
         }
-        public void SetStatus()
+        public void SetStatus(AircraftStatus status)
         {
             this.status = status;
+        }
+
+        public string GetId()
+        {
+            return this.id;
         }
        
 
@@ -40,7 +54,7 @@ namespace AirportSimulation
         // Updates the aircraft's state for one tick (15 minutes)
         public virtual void UpdateTick()
         {
-            if (status == 1)
+            if (status == Aircraft.AircraftStatus.InFlight)
             {
                 // Calculate distance covered in 15 minutes (speed / 4)
                 int distanceCovered = speed / 4;
@@ -58,7 +72,7 @@ namespace AirportSimulation
                 // When the aircraft reaches the airport, set status to Waiting
                 if (distance == 0)
                 {
-                    status = 2;
+                    status = Aircraft.AircraftStatus.Waiting;
                 }
             }
         }

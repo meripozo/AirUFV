@@ -9,6 +9,14 @@ namespace AirportSimulation
         public Aircraft currentAircraft { get; set; }
         public int ticksRemaining { get; set; } // ticks until the runway is free
 
+
+        // no type assigned as considered unecessary for runway status
+        public enum RunwayStatus
+        {
+            Free,
+            Occupied
+        }
+        
         public const int DefaultTicksAvailability = 3; // ticks it takes to land and free runway
 
         public Runway(string id)
@@ -19,15 +27,20 @@ namespace AirportSimulation
             this.ticksRemaining = 0;
         }
 
+        //Getter for status:
+        public RunwayStatus GetRunwayStatus()
+        {
+            return this.status;
+        }
         // Attempts to assign an aircraft to the runway for landing
         public bool RequestRunway(Aircraft aircraft)
         {
-            if (status == RunwayStatus.Free && aircraft.status == 2)
+            if (status == RunwayStatus.Free && aircraft.GetStatus() == Aircraft.AircraftStatus.Waiting)
             {
                 currentAircraft = aircraft;
                 status = RunwayStatus.Occupied;
                 ticksRemaining = DefaultTicksAvailability;
-                aircraft.status = 3;
+                aircraft.SetStatus(Aircraft.AircraftStatus.Landing);
                 return true;
             }
             return false;
@@ -45,7 +58,7 @@ namespace AirportSimulation
                 if (ticksRemaining == 0 && currentAircraft != null)
                 {
                     // Landing complete and aircraft is OnGround
-                    currentAircraft.status = 4;
+                    currentAircraft.SetStatus(Aircraft.AircraftStatus.OnGround);
                     ReleaseRunway();
                 }
             }
@@ -67,7 +80,7 @@ namespace AirportSimulation
             }
             else
             {
-                Console.WriteLine($"{id}: Occupied by {currentAircraft.id}, Ticks Remaining: {ticksRemaining}");
+                Console.WriteLine($"{id}: Occupied by {currentAircraft.GetId()}, Ticks Remaining: {ticksRemaining}");
             }            
         }
     }

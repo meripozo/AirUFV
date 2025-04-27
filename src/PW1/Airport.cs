@@ -10,6 +10,7 @@ namespace AirportSimulation
     {
         private List<Runway> Runways;
         private List<Aircraft> Aircrafts;
+        
 
         private bool isValid = false; // for testing purposes
 
@@ -29,7 +30,7 @@ namespace AirportSimulation
         public void ShowStatus()
         {
             Console.WriteLine("Runway Status:");
-            foreach (var runway in Runways)
+            foreach (Runway runway in Runways)
             {
                 runway.PrintRunwayInfo();
             }
@@ -37,7 +38,7 @@ namespace AirportSimulation
 
             Console.WriteLine("\nAircrafts Information: ");
             Console.WriteLine($"Number of Aircrafts loaded: {Aircrafts.Count}");
-            foreach (var aircraft in Aircrafts)
+            foreach (Aircraft aircraft in Aircrafts)
             {
                 aircraft.PrintAircraftInfo();
             }
@@ -52,29 +53,28 @@ namespace AirportSimulation
         public void AdvanceTick()
         {
             // Update each aircraft (skip if OnGround)
-            foreach (var aircraft in Aircrafts)
+            foreach (Aircraft aircraft in Aircrafts)
             {
-                if (aircraft.status != 4)
+                if (aircraft.GetStatus() != Aircraft.AircraftStatus.OnGround)
                 {
                     aircraft.UpdateTick();
                 }
             }
 
             // Attempt to assign waiting aircraft to free runways so it can land
-            foreach (var aircraft in Aircrafts)
+            foreach (Aircraft aircraft in Aircrafts)
             {
-                if (aircraft.status == 2)
+                if (aircraft.GetStatus() == Aircraft.AircraftStatus.Waiting)
                 {
                     bool searchingRunway = true;
                     while(searchingRunway)
                     {
-                        foreach (var runway in Runways)
+                        foreach (Runway runway in Runways)
                         {
-                            if (runway.status == RunwayStatus.Free)
+                            if (runway.GetRunwayStatus() == Runway.RunwayStatus.Free)
                             {
                                 runway.RequestRunway(aircraft);
                                 searchingRunway = false;
-                                //return; // no se puede usar
                             }
                         } 
                     }
@@ -82,7 +82,7 @@ namespace AirportSimulation
             }
 
             // Update runways to process landing ticks
-            foreach (var runway in Runways)
+            foreach (Runway runway in Runways)
             {
                 runway.UpdateTick();
             }
@@ -112,7 +112,6 @@ namespace AirportSimulation
                             return false;
                         }
 
-                        
                         // ID
                         string id = parts[0];
                         
@@ -132,22 +131,22 @@ namespace AirportSimulation
                             return false;
                         }
                         
-                        int status = 0;
+                        Aircraft.AircraftStatus status = 0;
                         if(parts[1] == "InFlight")
                         {
-                            status = 1;
+                            status = Aircraft.AircraftStatus.InFlight;
                         }
                         else if(parts[1] == "Waiting")
                         {
-                            status = 2;
+                            status = Aircraft.AircraftStatus.Waiting;
                         }
                         else if(parts[1] == "Landing")
                         {
-                            status = 3;
+                            status = Aircraft.AircraftStatus.Landing;
                         }
                         else if(parts[1] == "OnGround")
                         {
-                            status = 4;
+                            status = Aircraft.AircraftStatus.OnGround;
                         } 
 
                         // Distance
@@ -267,7 +266,7 @@ namespace AirportSimulation
             string owner = "";
             double maxLoad = 0;
             int numPassengers = 0;
-            int status = 0;
+            Aircraft.AircraftStatus status = 0;
 
 
             // Aircrfat Type
@@ -316,19 +315,39 @@ namespace AirportSimulation
             // State
             try
             {
+                int statusAux = 0;
                 do
                 {
                     Console.Clear();
                     Console.Write("Enter initial state, enter number: (1. InFlight, 2. Waiting, 3. Landing, 4. OnGround): ");
-                    status = Convert.ToInt32(Console.ReadLine());
-                    isValid = validInt.validateInput(Convert.ToString(status)); // check if status is valid
+                    statusAux = Convert.ToInt32(Console.ReadLine());
 
-                    if (status < 1 || status > 4)
+                    switch (statusAux)
+                    {
+                        case 1:
+                            status = Aircraft.AircraftStatus.InFlight;
+                            break;
+                        case 2:
+                            status = Aircraft.AircraftStatus.Waiting;
+                            break;
+                        case 3:
+                            status = Aircraft.AircraftStatus.Landing;
+                            break;
+                        case 4:
+                            status = Aircraft.AircraftStatus.OnGround;
+                            break;
+                        default:
+                            Console.WriteLine("Please, enter a number between 1 and 4.");
+                            break;
+                    }
+                    isValid = validInt.validateInput(Convert.ToString(statusAux)); // check if status is valid
+
+                    if (statusAux < 1 || statusAux > 4)
                     {
                         Console.WriteLine("Invalid selection.");
                     }
                 }
-                while (!isValid || status < 1 || status > 4); //validation
+                while (!isValid || statusAux < 1 || statusAux > 4); //validation
             }
             catch (FormatException)
             {
@@ -336,7 +355,7 @@ namespace AirportSimulation
             }
 
             // Distance & Speed
-            if (status == 1)
+            if (status == Aircraft.AircraftStatus.InFlight)
             {
                 try
                 {
@@ -403,7 +422,9 @@ namespace AirportSimulation
             }
 
             // Fuel Consumption
-            if (status == 1 || status == 2 || status == 3)
+            if (status == Aircraft.AircraftStatus.InFlight || 
+                status ==Aircraft.AircraftStatus.Waiting   || 
+                status == Aircraft.AircraftStatus.Landing)
             {
                 try
                 {

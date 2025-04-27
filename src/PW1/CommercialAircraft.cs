@@ -7,10 +7,10 @@ namespace AirportSimulation
         // this is a unique property for commercial aircrafts
         public int NumPassengers { get; set; }
 
-        public CommercialAircraft(string id, int status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, int numPassengers)
+        public CommercialAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, int numPassengers)
             : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
         {
-            NumPassengers = numPassengers;
+            this.NumPassengers = numPassengers;
         }
 
         // We Override the Print method from the aircraft class to include cargo-specific info
@@ -20,7 +20,7 @@ namespace AirportSimulation
 
             base.PrintAircraftInfo();
 
-            Console.WriteLine($", Passengers: {NumPassengers}");
+            Console.WriteLine($", Passengers: {this.NumPassengers}");
         }
     }
 }

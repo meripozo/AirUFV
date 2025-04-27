@@ -8,10 +8,10 @@ namespace AirportSimulation
         // unique property for private aircrafts
         public string owner { get; set; }
 
-        public PrivateAircraft(string id, int status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, string owner)
+        public PrivateAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, string owner)
             : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
         {
-            owner = owner;
+            this.owner = owner;
         }
         
         // We Override the Print method from the aircraft class to include cargo-specific info
@@ -21,7 +21,7 @@ namespace AirportSimulation
 
             base.PrintAircraftInfo();
 
-            Console.WriteLine($", Owner: {owner}");
+            Console.WriteLine($", Owner: {this.owner}");
         }
     }
 }
