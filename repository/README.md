@@ -28,9 +28,7 @@ Conclusion 9
 
 > 2
 >
-> <img src="./r31uy3mx.png"
-> style="width:0.33333in;height:0.33333in" />Ingeniería Informática,
-> Universidad Francisco de Vitoria ©
+
 
 **Introduction**
 
@@ -85,9 +83,7 @@ display the number of aircraft loaded manually using “Aircrafts.Count”.
 
 > 3
 >
-> <img src="./r4p1sbwn.png"
-> style="width:0.33333in;height:0.33333in" />Ingeniería Informática,
-> Universidad Francisco de Vitoria ©
+
 >
 > *-* *GetNumberOfAircrafts()*
 
@@ -144,9 +140,7 @@ it will exit.
 
 > 4
 >
-> <img src="./senakdd4.png"
-> style="width:0.33333in;height:0.33333in" />Ingeniería Informática,
-> Universidad Francisco de Vitoria ©
+
 
 **Aircraft**
 
@@ -206,9 +200,7 @@ the specific attribute along with the rest of the attributes.
 
 > 5
 >
-> <img src="./tuus0q5v.png"
-> style="width:0.33333in;height:0.33333in" />Ingeniería Informática,
-> Universidad Francisco de Vitoria ©
+
 
 **Runway**
 
@@ -250,16 +242,12 @@ This is the class diagram of our finished practical work:
 
 > 6
 >
-> <img src="./5ezczxt1.png"
-> style="width:0.33333in;height:0.33333in" />Ingeniería Informática,
-> Universidad Francisco de Vitoria ©
+
 >
 > <img src="./er4kudzs.png"
 > style="width:4.14583in;height:9.83333in" />7
 >
-> <img src="./k1nijd23.png"
-> style="width:0.33333in;height:0.33333in" />Ingeniería Informática,
-> Universidad Francisco de Vitoria ©
+
 
 **Problems**
 
@@ -290,9 +278,7 @@ Validations:
 >
 > 8
 >
-> <img src="./em2pisbq.png"
-> style="width:0.33333in;height:0.33333in" />Ingeniería Informática,
-> Universidad Francisco de Vitoria ©
+
 
 **Conclusion**
 
