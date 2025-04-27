@@ -7,24 +7,45 @@ namespace AirportSimulation
         public static void Main(string[] args)
         {
             Simulator simulator = new Simulator(); //we instantiate Simulator and Airport classes
+
+            ValidInt validInt = new ValidInt();
+
             bool exit = false;
+
+            bool isValid = false;
+
+            int option = 0;
+            
             while (!exit)
             {
-                Console.Clear();
+                try
+                {
+                    do
+                    {
+                        Console.Clear();
 
-                Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("╔═══════════════════════════════════════╗");
+                        Console.WriteLine("║    Airport Landing Simulation Menu:   ║");
+                        Console.WriteLine("║                                       ║");
+                        Console.WriteLine("║ 1. Load flights from file             ║");
+                        Console.WriteLine("║ 2. Add a flight manually              ║");
+                        Console.WriteLine("║ 3. Start simulation (Manual)          ║");
+                        Console.WriteLine("║ 4. Exit                               ║");
+                        Console.WriteLine("╚═══════════════════════════════════════╝");
+                        Console.Write("Select an option: ");
 
-                Console.WriteLine("╔═══════════════════════════════════════╗");
-                Console.WriteLine("║    Airport Landing Simulation Menu:   ║");
-                Console.WriteLine("║                                       ║");
-                Console.WriteLine("║ 1. Load flights from file             ║");
-                Console.WriteLine("║ 2. Add a flight manually              ║");
-                Console.WriteLine("║ 3. Start simulation (Manual)          ║");
-                Console.WriteLine("║ 4. Exit                               ║");
-                Console.WriteLine("╚═══════════════════════════════════════╝");
-                Console.Write("Select an option: ");
+                        option = Convert.ToInt32(Console.ReadLine());
 
-                int option = Convert.ToInt32(Console.ReadLine());
+                        isValid = validInt.validateInput(Convert.ToString(option));
+
+                    }while(!isValid);
+
+                    }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Error, please enter the correct data type.");
+                }
 
                 switch (option)
                 {

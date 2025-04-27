@@ -4,7 +4,7 @@ namespace AirportSimulation
 {
     public abstract class Verifications
     {
-        public abstract void validateInput(string input);
+        public abstract bool validateInput(string input);
 
 
 

@@ -10,24 +10,13 @@ namespace AirportSimulation
     {
         private List<Runway> Runways;
         private List<Aircraft> Aircrafts;
-        private int selectedType = 0;
-        private string id = "";
-        private int status = 0;
-        private int distance = 0;
-        private int speed = 0;
-        private double fuelCapacity = 0;
-        private double fuelConsumption = 0;
-        private double currentFuel = 0;
-        private string owner = "";
-        private int numPassengers = 0;
-        private double maxLoad = 0;
 
         private bool isValid = false; // for testing purposes
 
         public Airport()
         {
-            Runways = new List<Runway>();
-            Aircrafts = new List<Aircraft>();
+            this.Runways = new List<Runway>();
+            this.Aircrafts = new List<Aircraft>();
         }
 
         // Adds runway to runways list
@@ -98,6 +87,9 @@ namespace AirportSimulation
                 runway.UpdateTick();
             }
         }
+        ValidInt validInt = new ValidInt();
+        ValidDouble validDouble = new ValidDouble();
+        ValidString validString = new ValidString();
 
         public bool LoadAircraftFromFile(string filePath)
         {
@@ -120,9 +112,11 @@ namespace AirportSimulation
                             return false;
                         }
 
+                        
                         // ID
-                        id = parts[0];
-                        isValid = Verifications.IsValidString(id); // check if id is valid
+                        string id = parts[0];
+                        
+                        bool isValid = validString.validateInput(Convert.ToString(id)); // check if id is valid
                         if (!isValid)
                         {
                             Console.WriteLine("Invalid ID format.");
@@ -130,13 +124,15 @@ namespace AirportSimulation
                         }
 
                         // State
-                        isValid = Verifications.IsValidInt(Convert.ToInt32(parts[1])); // check if status is valid
+                        string state = parts[1];
+                        isValid = validString.validateInput(Convert.ToString(parts[1])); // check if status is valid
                         if (!isValid)
                         {
                             Console.WriteLine("Invalid status format.");
                             return false;
                         }
                         
+                        int status = 0;
                         if(parts[1] == "InFlight")
                         {
                             status = 1;
@@ -155,8 +151,8 @@ namespace AirportSimulation
                         } 
 
                         // Distance
-                        distance = Convert.ToInt32(parts[2]);
-                        isValid = Verifications.IsValidDouble(distance); // check if distance is valid
+                        int distance = Convert.ToInt32(parts[2]);
+                        isValid = validInt.validateInput(Convert.ToString(distance)); // check if distance is valid
                         if (!isValid)
                         {
                             Console.WriteLine("Invalid distance format.");
@@ -164,8 +160,8 @@ namespace AirportSimulation
                         }
 
                         // Speed
-                        speed = Convert.ToInt32(parts[3]);
-                        isValid = Verifications.IsValidInt(speed); // check if speed is valid
+                        int speed = Convert.ToInt32(parts[3]);
+                        isValid = validInt.validateInput(Convert.ToString(speed)); // check if speed is valid
                         if (!isValid)
                         {
                             Console.WriteLine("Invalid speed format.");
@@ -173,8 +169,8 @@ namespace AirportSimulation
                         }
 
                         // Fuel Capacity
-                        fuelCapacity = Convert.ToDouble(parts[5]);
-                        isValid = Verifications.IsValidDouble(fuelCapacity); // check if fuelCapacity is valid
+                        double fuelCapacity = Convert.ToDouble(parts[5]);
+                        isValid = validDouble.validateInput(Convert.ToString(fuelCapacity)); // check if fuelCapacity is valid
                         if (!isValid)
                         {
                             Console.WriteLine("Invalid fuel capacity format.");
@@ -182,19 +178,19 @@ namespace AirportSimulation
                         }
 
                         // Fuel Consumption
-                        fuelConsumption = Convert.ToDouble(parts[6]);
-                        isValid = Verifications.IsValidDouble(fuelConsumption); // check if fuelConsumption is valid
+                        double fuelConsumption = Convert.ToDouble(parts[6]);
+                        isValid = validDouble.validateInput(Convert.ToString(fuelConsumption)); // check if fuelConsumption is valid
                         if (!isValid)
                         {
                             Console.WriteLine("Invalid fuel consumption format.");
                             return false;
                         }
 
-                        currentFuel = fuelCapacity; // maxed fuel before starting flight
+                        double currentFuel = fuelCapacity; // maxed fuel before starting flight
 
                         // StringComparison for upper and lower case letter compatibility
                         string type = parts[4].ToLower();
-                        isValid = Verifications.IsValidString(type); // check if type is valid
+                        isValid = validString.validateInput(Convert.ToString(type)); // check if type is valid
                         if (!isValid)
                         {
                             Console.WriteLine("Invalid aircraft type format.");
@@ -204,7 +200,7 @@ namespace AirportSimulation
                         if (type == "commercial")
                         {
                             int numPassengers = Convert.ToInt32(parts[7]);
-                            isValid = Verifications.IsValidInt(numPassengers); // check if numPassengers is valid
+                            isValid = validInt.validateInput(Convert.ToString(numPassengers)); // check if numPassengers is valid
                             if (!isValid)
                             {
                                 Console.WriteLine("Invalid number of passengers format.");
@@ -216,7 +212,7 @@ namespace AirportSimulation
                         else if (type == "cargo")
                         {
                             double maxLoad = Convert.ToDouble(parts[7]);
-                            isValid = Verifications.IsValidDouble(maxLoad); // check if maxLoad is valid
+                            isValid = validDouble.validateInput(Convert.ToString(maxLoad)); // check if maxLoad is valid
                             if (!isValid)
                             {
                                 Console.WriteLine("Invalid maximum load format.");
@@ -228,7 +224,7 @@ namespace AirportSimulation
                         else if (type == "private")
                         {
                             string owner = parts[7];
-                            isValid = Verifications.IsValidString(owner); // check if owner is valid
+                            isValid = validString.validateInput(Convert.ToString(owner)); // check if owner is valid
                             if (!isValid)
                             {
                                 Console.WriteLine("Invalid owner format.");
@@ -261,9 +257,23 @@ namespace AirportSimulation
         // Adds an aircraft manually with the users console input
         public void AddAircraft()
         {   
+            int selectedType = 0;
+            string id = "";
+            int speed = 0;
+            int distance = 0;
+            double currentFuel = 0;
+            double fuelCapacity = 0;
+            double fuelConsumption = 0;
+            string owner = "";
+            double maxLoad = 0;
+            int numPassengers = 0;
+            int status = 0;
+
+
             // Aircrfat Type
             try
             {
+                
                 do
                 {
                     Console.WriteLine("Select an Aircraft Type:");
@@ -271,7 +281,7 @@ namespace AirportSimulation
                     Console.WriteLine(" 2. Cargo");
                     Console.WriteLine(" 3. Private");
                     selectedType = Convert.ToInt32(Console.ReadLine());
-                    isValid = Verifications.IsValidInt(selectedType); // check if selectedType is valid
+                    isValid = validInt.validateInput(Convert.ToString(selectedType)); // check if selectedType is valid
 
                     if (selectedType > 3 || selectedType < 1)
                     {
@@ -291,39 +301,39 @@ namespace AirportSimulation
             {
                 do
                 {
+                    Console.Clear();
                     Console.Write("Enter Aircraft ID: ");
                     id = Console.ReadLine();
-                    isValid = Verifications.IsValidString(id); // check if id is valid
+                    isValid = validString.validateInput(Convert.ToString(id)); // check if id is valid
 
-                } while (false); //validation
+                } while (!isValid); //validation
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error, please enter the correct data type");
+                Console.WriteLine("Error, please enter the correct data type.");
             }
-            isValid = false; // reset for next input
 
             // State
             try
             {
                 do
                 {
+                    Console.Clear();
                     Console.Write("Enter initial state, enter number: (1. InFlight, 2. Waiting, 3. Landing, 4. OnGround): ");
                     status = Convert.ToInt32(Console.ReadLine());
-                    isValid = Verifications.IsValidInt(status); // check if status is valid
+                    isValid = validInt.validateInput(Convert.ToString(status)); // check if status is valid
 
                     if (status < 1 || status > 4)
                     {
                         Console.WriteLine("Invalid selection.");
                     }
                 }
-                while (false || status < 1 || status > 4); //validation
+                while (!isValid || status < 1 || status > 4); //validation
             }
             catch (FormatException)
             {
-                Console.WriteLine("Error, please enter the correct data type");
+                Console.WriteLine("Error, please enter the correct data type.");
             }
-            isValid = false; // reset for next input
 
             // Distance & Speed
             if (status == 1)
@@ -332,37 +342,38 @@ namespace AirportSimulation
                 {
                     do
                     {
+                        Console.Clear();
                         Console.Write("Enter distance from airport (km): ");
                         distance = Convert.ToInt32(Console.ReadLine());
-                        isValid = Verifications.IsValidInt(distance); // check if distance is valid
+                        isValid = validInt.validateInput(Convert.ToString(distance)); // check if distance is valid
 
                         if (distance < 0)
                         {
-                            Console.WriteLine("Error, please enter the correct data type");
+                            Console.WriteLine("Error, please enter the correct data type.");
                         }
 
-                    } while (false || distance < 0); //validation
-                    isValid = false; // reset for next input
+                    } while (!isValid || distance < 0); //validation
                     
                     do
                     {
+                        Console.Clear();
                         Console.Write("Enter speed (km/h): ");
                         speed = Convert.ToInt32(Console.ReadLine());
-                        isValid = Verifications.IsValidInt(speed); // check if speed is valid
+                        isValid = validInt.validateInput(Convert.ToString(speed)); // check if speed is valid
 
                         if (speed < 0)
                         {
-                            Console.WriteLine("Error, please enter the correct data type");
+                            Console.WriteLine("Error, please enter the correct data type.");
                         }
 
-                    } while (false || speed < 0); //validation
-                    isValid = false; // reset for next input
+                    } while (!isValid || speed < 0); //validation
                 }
                 catch (FormatException)
                 {
-                    Console.WriteLine("Error, please enter the correct data type");
+                    Console.WriteLine("Error, please enter the correct data type.");
                 }
             }
+
             else
             {
                 distance = 0;
@@ -374,22 +385,22 @@ namespace AirportSimulation
             {
                 do
                 {
+                    Console.Clear();
                     Console.Write("Enter fuel capacity (liters): ");
                     fuelCapacity = Convert.ToDouble(Console.ReadLine());
-                    isValid = Verifications.IsValidDouble(fuelCapacity); // check if fuelCapacity is valid
+                    isValid = validDouble.validateInput(Convert.ToString(fuelCapacity)); // check if fuelCapacity is valid
 
                     if (fuelCapacity < 0)
                     {
                         Console.WriteLine("Error, please enter the correct data type");
                     }
 
-                } while (false || fuelCapacity < 0); //validation
+                } while (!isValid || fuelCapacity < 0); //validation
             }
             catch (FormatException)
             {
                 Console.WriteLine("Error, please enter the correct data type");
             }
-            isValid = false; // reset for next input
 
             // Fuel Consumption
             if (status == 1 || status == 2 || status == 3)
@@ -398,22 +409,22 @@ namespace AirportSimulation
                 {
                     do
                     {
+                        Console.Clear();
                         Console.Write("Enter fuel consumption (liters/km): ");
                         fuelConsumption = Convert.ToDouble(Console.ReadLine());
-                        isValid = Verifications.IsValidDouble(fuelConsumption); // check if fuelConsumption is valid
+                        isValid = validDouble.validateInput(Convert.ToString(fuelConsumption)); // check if fuelConsumption is valid
 
                         if (fuelConsumption < 0)
                         {
                             Console.WriteLine("Error, please enter the correct data type");
                         }
 
-                    } while (false || fuelConsumption < 0); //validation
+                    } while (!isValid || fuelConsumption < 0); //validation
                 }
                 catch (FormatException)
                 {
                     Console.WriteLine("Error, please enter the correct data type");
                 }
-                isValid = false; // reset for next input
             }
             else
             {
@@ -428,13 +439,18 @@ namespace AirportSimulation
                 case 1:
                     try
                     {
-                        Console.Write("Enter number of passengers: ");
-                        numPassengers = Convert.ToInt32(Console.ReadLine()); // verification
+                        do
+                        {
+                            Console.Write("Enter number of passengers: ");
+                            numPassengers = Convert.ToInt32(Console.ReadLine()); // verification
 
-                        Aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numPassengers));
-                        Console.WriteLine("Commercial Aircraft Successfully added!");
-                        Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
-                        Console.ReadLine();
+                            isValid = validInt.validateInput(Convert.ToString(numPassengers));
+                            Aircrafts.Add(new CommercialAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, numPassengers));
+                            Console.WriteLine("Commercial Aircraft Successfully added!");
+                            Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
+                            Console.ReadLine();
+
+                        }while(!isValid);
                     }
                     catch (FormatException)
                     {
@@ -444,13 +460,18 @@ namespace AirportSimulation
                 case 2:
                     try
                     {
-                        Console.Write("Enter maximum load (kg): ");
-                        maxLoad = Convert.ToDouble(Console.ReadLine()); // verification
+                        do
+                        {
+                            Console.Write("Enter maximum load (kg): ");
+                            maxLoad = Convert.ToDouble(Console.ReadLine()); // verification
+                            
+                            Aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maxLoad));
+                            Console.WriteLine("Cargo Aircraft Successfully added!");
+                            Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
+                            Console.ReadLine();
+
+                        }while(!isValid);
                         
-                        Aircrafts.Add(new CargoAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, maxLoad));
-                        Console.WriteLine("Cargo Aircraft Successfully added!");
-                        Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
-                        Console.ReadLine();
                     }
                     catch (FormatException)
                     {
@@ -460,13 +481,18 @@ namespace AirportSimulation
                 case 3:
                     try
                     {
-                        Console.Write("Enter owner name: ");
-                        owner = Console.ReadLine(); // verification
+                        do
+                        {
+                            Console.Write("Enter owner name: ");
+                            owner = Console.ReadLine(); // verification
+                            
+                            Aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, owner));
+                            Console.WriteLine("Private Aircraft Successfully added!");
+                            Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
+                            Console.ReadLine();
+
+                        }while(!isValid);
                         
-                        Aircrafts.Add(new PrivateAircraft(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel, owner));
-                        Console.WriteLine("Private Aircraft Successfully added!");
-                        Console.WriteLine($"Loaded Aircrafts: {Aircrafts.Count}"); //temporary for testing
-                        Console.ReadLine();
                     }
                     catch (FormatException)
                     {
