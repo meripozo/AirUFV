@@ -9,7 +9,7 @@ namespace AirportSimulation
         public Aircraft CurrentAircraft { get; set; }
         public int TicksRemaining { get; set; } // ticks until the runway is free
 
-        public const int DefaultTicksAvailability = 3; // ticks it takes to land and free runway
+        public const int DefaultTicksAvailability = 3; // ticks it takes to land and free a runway
 
         public Runway(string id)
         {
@@ -22,6 +22,7 @@ namespace AirportSimulation
         // Attempts to assign an aircraft to the runway for landing
         public bool RequestRunway(Aircraft aircraft)
         {
+            // if runway is free and aircraft is in waiting status, assign it to the runway, runway set to occupied and strat ticks countdown
             if (Status == RunwayStatus.Free && aircraft.Status == 2)
             {
                 CurrentAircraft = aircraft;
@@ -33,9 +34,10 @@ namespace AirportSimulation
             return false;
         }
 
-        // Update the runway's occupation time for one tick.
+        // Update runway's occupation time for one tick
         public void UpdateTick()
         {
+            // if runway is occupied, decrease ticks remaining or free it if ticks are 0
             if (Status == RunwayStatus.Occupied)
             {
                 if (TicksRemaining > 0)
@@ -51,7 +53,7 @@ namespace AirportSimulation
             }
         }
 
-        // Frees the runway
+        // frees runway when aircraft lands
         public void ReleaseRunway()
         {
             CurrentAircraft = null;
@@ -59,6 +61,7 @@ namespace AirportSimulation
             TicksRemaining = 0;
         }
 
+        // prints runway info on screen depending on its status
         public void PrintRunwayInfo()
         {
             if (Status == RunwayStatus.Free)

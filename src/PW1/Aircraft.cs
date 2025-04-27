@@ -49,6 +49,7 @@ namespace AirportSimulation
             }
         }
 
+        // Prints aircrfat info on screen
         public virtual void PrintAircraftInfo()
         {
             Console.Write($" ID: {ID}, Status: {Status}, Distance: {Distance}km, Speed: {Speed}km/h, Fuel: {CurrentFuel}/{FuelCapacity}L");
