@@ -19,7 +19,7 @@ namespace AirportSimulation
         
         public const int DefaultTicksAvailability = 3; // ticks it takes to land and free runway
 
-        public Runway(string id)
+        public Runway(string id, RunwayStatus status, Aircraft? currentAircraft, int ticksRemaining)
         {
             this.id = id;
             this.status = RunwayStatus.Free;

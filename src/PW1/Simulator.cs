@@ -9,8 +9,6 @@ namespace AirportSimulation
         public Simulator()
         {
             airport = new Airport();
-            airport.AddRunway(new Runway("Runway-1"));
-            airport.AddRunway(new Runway("Runway-2"));
         }
         public void LoadAircraftFromFile(string path)
         {

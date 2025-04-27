@@ -8,7 +8,7 @@ namespace AirportSimulation
 {
     public class Airport
     {
-        private List<Runway> Runways;
+        private Runway[] Runways;
         private List<Aircraft> Aircrafts;
         
 
@@ -16,15 +16,15 @@ namespace AirportSimulation
 
         public Airport()
         {
-            this.Runways = new List<Runway>();
+            this.Runways = 
+            [
+                new Runway("Runway 1", Runway.RunwayStatus.Free, null, 3),
+                new Runway("Runway 2", Runway.RunwayStatus.Free, null, 3),
+                new Runway("Runway 3", Runway.RunwayStatus.Free, null, 3),
+            ];
             this.Aircrafts = new List<Aircraft>();
         }
 
-        // Adds runway to runways list
-        public void AddRunway(Runway runway)
-        {
-            Runways.Add(runway);
-        }
 
         // Display the status of all runways and aircraft
         public void ShowStatus()
@@ -268,11 +268,9 @@ namespace AirportSimulation
             int numPassengers = 0;
             Aircraft.AircraftStatus status = 0;
 
-
             // Aircrfat Type
             try
             {
-                
                 do
                 {
                     Console.WriteLine("Select an Aircraft Type:");
@@ -285,10 +283,10 @@ namespace AirportSimulation
                     if (selectedType > 3 || selectedType < 1)
                     {
                         Console.WriteLine("Invalid selection.");
+                        Console.ReadLine();
                     }
 
-                } while (false || selectedType > 3 || selectedType < 1); //validation
-                isValid = false; // reset for next input
+                } while (!isValid || selectedType > 3 || selectedType < 1); //validation
             }
             catch (FormatException)
             {

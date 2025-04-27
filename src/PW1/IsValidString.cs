@@ -8,9 +8,10 @@ namespace AirportSimulation
         public override bool validateInput(string input)
         {
             // Here we check if input is null or empty
-            if (input == null || input.Trim().Length == 0)
+            if (input == null || input.Trim().Length == 0 || input == "")
             {
                 Console.WriteLine("Invalid input. Please enter a non-empty string.");
+                Console.ReadLine();
                 return false;
             }    
             return true;

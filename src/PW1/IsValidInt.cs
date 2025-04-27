@@ -11,15 +11,23 @@ namespace AirportSimulation
             for (int i = 0; i < input.Length; i++)
             {
                 // check if double is negative
-                if (input[i] < 0)
+                if (input[i] == '-' && i == 0)
                 {
                     Console.WriteLine("Invalid input. Please enter a non-negative integer.");
+                    Console.ReadLine();
+                    return false;
+                }
+                else if (input == null || input == "")
+                {
+                    Console.WriteLine("Invalid input. Please enter a digit.");
+                    Console.ReadLine();
                     return false;
                 }
                 // check if input is a digit
                 else if( !char.IsDigit(input[i]))
                 {
                     Console.WriteLine("Invalid input. Please enter a digit.");
+                    Console.ReadLine();
                     return false;
                 }
             }
