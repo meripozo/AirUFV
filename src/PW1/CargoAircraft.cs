@@ -5,12 +5,12 @@ namespace AirportSimulation
     public class CargoAircraft : Aircraft
     {
         // this is a unique property for cargo aircrafts
-        public double MaxLoad { get; set; }
+        public double maxLoad { get; set; }
 
         public CargoAircraft(string id, AircraftStatus status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel, double maxLoad)
             : base(id, status, distance, speed, fuelCapacity, fuelConsumption, currentFuel)
         {
-            this.MaxLoad = maxLoad;
+            this.maxLoad = maxLoad;
         }
 
         // We Override the Print method from the aircraft class to include cargo-specific info
@@ -20,7 +20,7 @@ namespace AirportSimulation
 
             base.PrintAircraftInfo();
 
-            Console.WriteLine($", Max Load: {this.MaxLoad}kg");
+            Console.WriteLine($", Max Load: {this.maxLoad}kg");
         }
     }
 }
