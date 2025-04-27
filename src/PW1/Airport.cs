@@ -54,7 +54,7 @@ namespace AirportSimulation
             // Update each aircraft (skip if OnGround)
             foreach (var aircraft in Aircrafts)
             {
-                if (aircraft.Status != 4)
+                if (aircraft.status != 4)
                 {
                     aircraft.UpdateTick();
                 }
@@ -63,14 +63,14 @@ namespace AirportSimulation
             // Attempt to assign waiting aircraft to free runways so it can land
             foreach (var aircraft in Aircrafts)
             {
-                if (aircraft.Status == 2)
+                if (aircraft.status == 2)
                 {
                     bool searchingRunway = true;
                     while(searchingRunway)
                     {
                         foreach (var runway in Runways)
                         {
-                            if (runway.Status == RunwayStatus.Free)
+                            if (runway.status == RunwayStatus.Free)
                             {
                                 runway.RequestRunway(aircraft);
                                 searchingRunway = false;

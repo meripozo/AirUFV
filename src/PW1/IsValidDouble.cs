@@ -2,10 +2,10 @@ using System;
 
 namespace AirportSimulation
 {
-    // derive from verifications class
+    // we create ValidDouble. It derives from verifications class
     public class ValidDouble : Verifications
     {
-        // override validateInput method to check if double input is valid
+        // We override validateInput method to check if double input is valid
         public override bool validateInput(string input)
         {
             for (int i = 0; i < input.Length; i++)
@@ -24,6 +24,7 @@ namespace AirportSimulation
                 }
             }
             return true;
+            
         }
     }
 }

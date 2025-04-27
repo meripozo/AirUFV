@@ -2,15 +2,15 @@ using System;
 
 namespace AirportSimulation
 {
-    // derived from verifications class
+    // we create ValidInt. It derives from verifications class
     public class ValidInt : Verifications
     {
-        // Override validateInput method to check if int input is valid
+        // We override validateInput method to check if double input is valid
         public override bool validateInput(string input)
         {
             for (int i = 0; i < input.Length; i++)
             {
-                // check if int is negative
+                // check if double is negative
                 if (input[i] < 0)
                 {
                     Console.WriteLine("Invalid input. Please enter a non-negative integer.");

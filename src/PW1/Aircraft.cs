@@ -4,55 +4,70 @@ namespace AirportSimulation
 {
     public abstract class Aircraft
     {
-        public string ID { get; set; }
-        public int Status { get; set; }
-        public int Distance { get; set; }          // in kilometers
-        public int Speed { get; set; }             // in km/h
-        public double FuelCapacity { get; set; }   // in liters
-        public double FuelConsumption { get; set; } // liters per km
-        public double CurrentFuel { get; set; }     // in liters
+        protected string id { get; set; }
+        protected int status { get; set; }
+        protected int distance { get; set; }          // in kilometers
+        protected int speed { get; set; }             // in km/h
+        protected double fuelCapacity { get; set; }   // in liters
+        protected double fuelConsumption { get; set; } // liters per km
+        protected double currentFuel { get; set; }     // in liters
 
         public Aircraft(string id, int status, int distance, int speed, double fuelCapacity, double fuelConsumption, double currentFuel)
         {
-            ID = id;
-            Status = status;
-            Distance = distance;
-            Speed = speed;
-            FuelCapacity = fuelCapacity;
-            FuelConsumption = fuelConsumption;
-            CurrentFuel = currentFuel;
+            this.id = id;
+            this.status = status;
+            this.distance = distance;
+            this.speed = speed;
+            this.fuelCapacity = fuelCapacity;
+            this.fuelConsumption = fuelConsumption;
+            this.currentFuel = currentFuel;
         }
+        public string GetID()
+        {
+            return this.id;
+        }
+        public int GetStatus()
+        {
+            return this.status;
+        }
+        public void SetStatus()
+        {
+            this.status = status;
+        }
+       
+
 
         // Updates the aircraft's state for one tick (15 minutes)
         public virtual void UpdateTick()
         {
-            if (Status == 1)
+            if (status == 1)
             {
                 // Calculate distance covered in 15 minutes (speed / 4)
-                int distanceCovered = Speed / 4;
-                if (distanceCovered > Distance)
+                int distanceCovered = speed / 4;
+                if (distanceCovered > distance)
                 {
-                    distanceCovered = Distance;
+                    distanceCovered = distance;
                 }
-                Distance -= distanceCovered;
+                distance -= distanceCovered;
 
                 // Consumed fuel according to distance covered
-                double fuelUsed = distanceCovered * FuelConsumption;
-                CurrentFuel -= fuelUsed; 
-                if (CurrentFuel < 0) CurrentFuel = 0; // Avoid a negative fuel value
+                double fuelUsed = distanceCovered * fuelConsumption;
+                currentFuel -= fuelUsed; 
+                if (currentFuel < 0) currentFuel = 0; // Avoid a negative fuel value
 
                 // When the aircraft reaches the airport, set status to Waiting
-                if (Distance == 0)
+                if (distance == 0)
                 {
-                    Status = 2;
+                    status = 2;
                 }
             }
         }
 
-        // Prints aircrfat info on screen
+        // Here we use create this virtual funcion, in order to override it when we print aircrafts info, 
+        // depending on the type
         public virtual void PrintAircraftInfo()
         {
-            Console.Write($" ID: {ID}, Status: {Status}, Distance: {Distance}km, Speed: {Speed}km/h, Fuel: {CurrentFuel}/{FuelCapacity}L");
+            Console.Write($" ID: {id}, Status: {status}, Distance: {distance}km, Speed: {speed}km/h, Fuel: {currentFuel}/{fuelCapacity}L");
         }
     }
 }

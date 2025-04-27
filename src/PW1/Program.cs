@@ -6,12 +6,14 @@ namespace AirportSimulation
     {
         public static void Main(string[] args)
         {
-            Simulator simulator = new Simulator(); // instantiation of Simulator and Airport classes
+            //we instantiate Simulator class
+            Simulator simulator = new Simulator(); 
 
-            ValidInt validInt = new ValidInt(); // instantiation of ValidInt class for sleected option in menu
-
+            // instantiation of ValidInt class for sleected option in menu
+            ValidInt validInt = new ValidInt();
             // properties for controlling flow of program
             bool exit = false;
+
             bool isValid = false;
 
             int option = 0;
@@ -37,9 +39,11 @@ namespace AirportSimulation
 
                         option = Convert.ToInt32(Console.ReadLine());
 
-                        isValid = validInt.validateInput(Convert.ToString(option)); // validate input using ValidInt class
+                        // validate input using ValidInt class
+                        isValid = validInt.validateInput(Convert.ToString(option));
 
-                    }while(!isValid); // doesn´t stop looping until valid input is given
+                    // doesn´t stop looping until valid input is given
+                    }while(!isValid);
 
                     }
                 catch (FormatException)
@@ -52,17 +56,20 @@ namespace AirportSimulation
                     case 1:
                         Console.Write("Enter file path: ");
                         string filePath = Console.ReadLine();
-                        simulator.LoadAircraftFromFile(filePath); // load aircraft from file using path given by user
+                        // load aircraft from file using path given by user
+                        simulator.LoadAircraftFromFile(filePath);
                         Console.ReadLine();
                         break;
                     case 2:
-                        simulator.AddAircraft(); // add aircraft manually
+                        // we add aircraft manually
+                        simulator.AddAircraft();
                         break;
                     case 3:
-                        simulator.RunSimulationManu(); // start simulation manually
+                         // the simulation is started manually
+                        simulator.RunSimulationManu();
                         break;
                     case 4:
-                        exit = true; // exit program
+                        exit = true;
                         break;
                     default:
                         Console.WriteLine("Invalid option. Please, select an option between 1 and 4.");
